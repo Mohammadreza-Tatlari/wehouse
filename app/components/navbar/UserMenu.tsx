@@ -38,8 +38,7 @@ export default function UserMenu() {
                     onClick={() => {}} 
                     label='Login' />
                     <MenuItem 
-                    onClick={() => {console.log("SIGN UP");
-                    }} 
+                    onClick={() => {}} 
                     label='Sign Up' />
                     </>
                 </div>
