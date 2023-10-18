@@ -44,7 +44,7 @@ export default function Modal({
     //1sec for amination then to close the app
     setTimeout(() => {
       onClose();
-    }, 500);
+    }, 300);
   }, [disabled, onClose]);
 
   //check if model is disable and break the function c...
@@ -75,8 +75,8 @@ export default function Modal({
                duration of this div should be sync to handleClose 
               if model is going to be shown */}
           <div
-            className={`duration-500 h-full${
-              showModal ? "translate-y-0" : "translate-y-full"
+            className={`duration-300 h-full${
+              showModal ? "translate-y-0" : "translate-y-100"
             } ${showModal ? "opacity-100" : "opacity-0"}`}
           >
             <div className="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -115,6 +115,8 @@ export default function Modal({
                       />
                     )}
                   </div>
+                  {/* footer */}
+                  {footer}
                 </div>
               </div>
             </div>

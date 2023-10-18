@@ -3,7 +3,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from './components/navbar/Navbar'
 import ClientOnly from './components/ClientOnly'
-import Modal from './components/modals/Modal'
+import RegisterModal from './components/modals/RegisterModal'
+import ToasterProvider from './providers/ToasterProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,9 +22,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ClientOnly>
+        <ToasterProvider />
         <Navbar />
-        {/* Modal cause any modalation such as login renting or pop up actions */}
-        <Modal actionLabel='Submit' isOpen title='Hardcoded Title for modal demostration' />
+        {/* modals are highly interactive. keep it in ClientOnly wrapper */}
+        <RegisterModal />
+        {/* <Modal actionLabel='Submit' isOpen title='Hardcoded Title for modal demostration' /> */}
         </ClientOnly>
         {children}
         </body>
