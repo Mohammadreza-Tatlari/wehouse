@@ -1,5 +1,6 @@
 "use client";
-import { IconType, icons } from "react-icons";
+
+import { IconType } from "react-icons";
 
 interface ButtonProps {
   label: string;
@@ -21,7 +22,9 @@ export default function Button({
   return (
     <>
       <button
-        className={` relative disabled:opacity-70 disabled:cursor-not-allowed rounded-md hover:opacity-80 transition w-2/3
+      onClick={onClick}
+      disabled={disabled}
+      className={` relative disabled:opacity-70 disabled:cursor-not-allowed rounded-md hover:opacity-80 transition w-2/3
       ${outline ? `bg-white` : `bg-slate-600`}
       ${outline ? `border-black` : `border-slate-600`}
       ${outline ? `text-black` : `text-white`}

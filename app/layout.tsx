@@ -23,7 +23,7 @@ export default function RootLayout({
         <ClientOnly>
         <Navbar />
         {/* Modal cause any modalation such as login renting or pop up actions */}
-        <Modal isOpen title='Hardcoded Title for modal demostration' />
+        <Modal actionLabel='Submit' isOpen title='Hardcoded Title for modal demostration' />
         </ClientOnly>
         {children}
         </body>
