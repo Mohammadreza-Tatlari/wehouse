@@ -19,6 +19,7 @@ import Button from "../Button";
 export default function RegisterModal() {
     //getting register modal from 
     const registerModal = useRegisterModal();
+    const [isShowingPass , setIsShowingPass] = useState<boolean>(true);
     const [isLoading , setIsloading] = useState<boolean>(false)
     const {
         register,
@@ -28,11 +29,16 @@ export default function RegisterModal() {
         }
     } = useForm<FieldValues>({
         defaultValues:{
-        name: "",
-        email: "",
-        password: "",
-    }
+            name: "",
+            email: "",
+            password: "",
+        }
     });
+
+    function toggleShowPass(){
+        setIsShowingPass(!isShowingPass)
+    }
+
     //axios functionality for POST method will be added but from now just working on UI 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsloading(true);
@@ -77,10 +83,16 @@ export default function RegisterModal() {
             <Input
             id="password"
             label="password"
+            type={isShowingPass ? "password" : ''}
             disabled={isLoading}
             register={register}
             errors={errors}
             required />
+            <div className="flex flex-row gap-1">
+            <p>show Password</p>
+            <input type="checkbox" onClick={toggleShowPass} />
+            </div>
+            
         </div>
     )
 
