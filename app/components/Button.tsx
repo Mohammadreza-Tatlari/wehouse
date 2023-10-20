@@ -1,8 +1,8 @@
 "use client";
 
 import { IconType } from "react-icons";
-import {FcGoogle} from 'react-icons/fc';
-import {AiFillGithub} from 'react-icons/ai';
+import { FcGoogle } from "react-icons/fc";
+import { AiFillGithub } from "react-icons/ai";
 interface ButtonProps {
   label: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -23,9 +23,9 @@ export default function Button({
   return (
     <>
       <button
-      onClick={onClick}
-      disabled={disabled}
-      className={` relative disabled:opacity-70 disabled:cursor-not-allowed rounded-md hover:opacity-80 transition
+        onClick={onClick}
+        disabled={disabled}
+        className={` relative disabled:opacity-70 disabled:cursor-not-allowed rounded-md hover:opacity-80 transition
       ${Icon === FcGoogle || Icon == AiFillGithub ? `w-full` : `w-2/3`}
       ${outline ? `bg-white` : `bg-slate-600`}
       ${outline ? `border-black` : `border-slate-600`}
