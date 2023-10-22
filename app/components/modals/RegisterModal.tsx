@@ -4,7 +4,7 @@
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 //hooks and Components
@@ -36,13 +36,14 @@ export default function RegisterModal() {
     setIsShowingPass(!isShowingPass);
   }
 
-  //axios functionality for POST method will be added but from now just working on UI
+  //using axios to POST the Registeration Data to the DataBase fields are avaiable in DB
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsloading(true);
     axios
       .post("/api/register", data)
       //when Process is finished. close the Modal
       .then(() => {
+        toast.success("Registeration is done")
         registerModal.onClose();
       })
       .catch((error) => {
@@ -130,7 +131,7 @@ export default function RegisterModal() {
       onClose={registerModal.onClose}
       //is a useForm hook
       onSubmit={handleSubmit(onSubmit)}
-      title="Register"
+      title="Registeration"
       actionLabel="Continue"
       body={bodyContent}
       footer={footerContent}
