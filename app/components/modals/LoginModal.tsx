@@ -3,7 +3,7 @@
 //packages and Icons
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { signIn } from 'next-auth/react'
 import { toast } from "react-hot-toast";
@@ -19,7 +19,7 @@ import Input from "../Inputs/Input";
 import Button from "../Button";
 
 export default function LoginModal() {
-  //don't delete this part because we need to switched from login to register model
+  //don't delete this part because we need to switch from login to register model
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const router = useRouter()
@@ -42,7 +42,6 @@ export default function LoginModal() {
  //ERROR IS HERE
   //Using next-auth signIn for login Operation
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log("ONSUBMIT FIRED" );
     setIsloading(true);
     //using [...nextAuth] file in api/auth for credentials.
     //credentialProvider accepts email and password
@@ -52,7 +51,6 @@ export default function LoginModal() {
   })
   .then((callback) => {
     setIsloading(false)
-    console.log("then functionality happened");
     
     if(callback?.ok){    
       toast.success("Logged In")
@@ -99,13 +97,13 @@ export default function LoginModal() {
       <hr />
       <Button
         outline
-        onClick={() => {}}
+        onClick={() => signIn('google')}
         label="Continue with Google"
         icon={FcGoogle}
       />
       <Button
         outline
-        onClick={() => {}}
+        onClick={() => signIn('github')}
         label="Continue with GitHub"
         icon={AiFillGithub}
       />
@@ -124,7 +122,7 @@ export default function LoginModal() {
   );
 
   return (
-
+ 
     <Modal
       //does not let changes while loading
       disabled={isLoading}

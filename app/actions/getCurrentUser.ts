@@ -29,8 +29,15 @@ export default async function getCurrentUser() {
         if (!currentUser) {
             return null
         }
+
         //if all conditions are passed then user that match with current Logging user will be sent
-        return currentUser;
+        //return currentUser;
+        return{  
+            ...currentUser,
+            createdAt: currentUser.createdAt.toISOString(),
+            updateAt: currentUser.updateAt.toISOString(),
+            emailVerified: currentUser.emailVerified?.toISOString() || null
+        }
     } catch (error: any) {
         return null;
     }

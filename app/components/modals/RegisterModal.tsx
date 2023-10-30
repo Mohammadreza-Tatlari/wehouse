@@ -15,6 +15,9 @@ import Input from "../Inputs/Input";
 import { toast } from "react-hot-toast";
 import Button from "../Button";
 
+ //auth
+import {signIn} from 'next-auth/react'
+
 export default function RegisterModal() {
   //getting register modal from
   const registerModal = useRegisterModal();
@@ -98,13 +101,15 @@ export default function RegisterModal() {
       <hr />
       <Button
         outline
-        onClick={() => {}}
+        onClick={() => signIn('google')}
         label="Continue with Google"
         icon={FcGoogle}
       />
       <Button
         outline
-        onClick={() => {}}
+        //ISSUE 00
+        //github sign in returns the value of the github account but it still does not change login status
+        onClick={() => signIn('github')}
         label="Continue with GitHub"
         icon={AiFillGithub}
       />

@@ -5,11 +5,12 @@ import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
 
-import { User } from "@prisma/client";
+import { SafeUserType } from "@/app/types";
 
 interface NavbarProps{
   //using User from Prisma because it is created by npx prisma db push
-  currentUser?: User | null;
+  // Omit<User> is being used in SafeUserType
+  currentUser?: SafeUserType | null;
 }
 export default function Navbar({currentUser}:NavbarProps) {
   //console.log("current user is ",{currentUser});
