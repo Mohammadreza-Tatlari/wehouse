@@ -1,11 +1,12 @@
 "use client"
 import React from "react";
-import Container from "../Container";
 import Logo from "./Logo";
+import { SafeUserType } from "@/app/types";
+
 import Search from "./Search";
 import UserMenu from "./UserMenu";
-
-import { SafeUserType } from "@/app/types";
+import Container from "../Container";
+import Categories from "./Categories";
 
 interface NavbarProps{
   //using User from Prisma because it is created by npx prisma db push
@@ -26,6 +27,7 @@ export default function Navbar({currentUser}:NavbarProps) {
         </div>
       </Container>
       </div>
+      <Categories />
     </div>
   );
 }
