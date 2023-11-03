@@ -3,11 +3,11 @@
 //packages and Icons
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { signIn } from 'next-auth/react'
+import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
-//use next/navigation instead of router 
+//use next/navigation instead of router
 import { useRouter } from "next/navigation";
 
 //hooks and Components
@@ -22,7 +22,8 @@ export default function LoginModal() {
   //don't delete this part because we need to switch from login to register model
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
-  const router = useRouter()
+
+  const router = useRouter();
   const [isShowingPass, setIsShowingPass] = useState<boolean>(true);
   const [isLoading, setIsloading] = useState<boolean>(false);
   const {
@@ -39,31 +40,35 @@ export default function LoginModal() {
   function toggleShowPass() {
     setIsShowingPass(!isShowingPass);
   }
- //ERROR IS HERE
+  //ERROR IS HERE
   //Using next-auth signIn for login Operation
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsloading(true);
     //using [...nextAuth] file in api/auth for credentials.
     //credentialProvider accepts email and password
-    signIn('credentials',{
-    ...data,
-    redirect: false,
-  })
-  .then((callback) => {
-    setIsloading(false)
-    
-    if(callback?.ok){    
-      toast.success("Logged In")
-      //update active values
-      router.refresh();
-      loginModal.onClose();
-    }
-    if(callback?.error){
-      console.log("error is " ,callback.error );
-      toast.error(callback.error);
-    }
-  })
-  }
+    signIn("credentials", {
+      ...data,
+      redirect: false,
+    }).then((callback) => {
+      setIsloading(false);
+
+      if (callback?.ok) {
+        toast.success("Logged In");
+        //update active values
+        router.refresh();
+        loginModal.onClose();
+      }
+      if (callback?.error) {
+        console.log("error is ", callback.error);
+        toast.error(callback.error);
+      }
+    });
+  };
+
+  const toggleModal = useCallback(() => {
+    loginModal.onClose();
+    registerModal.onOpen();
+  }, [registerModal, loginModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -97,24 +102,24 @@ export default function LoginModal() {
       <hr />
       <Button
         outline
-        onClick={() => signIn('google')}
+        onClick={() => signIn("google")}
         label="Continue with Google"
         icon={FcGoogle}
       />
       <Button
         outline
-        onClick={() => signIn('github')}
+        onClick={() => signIn("github")}
         label="Continue with GitHub"
         icon={AiFillGithub}
       />
       <div className=" text-neutral-500 text-center mt-4 font-light">
         <div className="justify-center flex flex-row items-center gap-2">
-          <div>Already have an Account?</div>
+          <div>First time using Wehouse?</div>
           <div
             className="text-neutral-800 font-bold cursor-pointer hover:underline"
-            onClick={registerModal.onClose}
+            onClick={toggleModal}
           >
-            Login
+            Create an account
           </div>
         </div>
       </div>
@@ -122,7 +127,6 @@ export default function LoginModal() {
   );
 
   return (
- 
     <Modal
       //does not let changes while loading
       disabled={isLoading}

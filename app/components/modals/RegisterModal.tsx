@@ -4,23 +4,26 @@
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 //hooks and Components
 import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
 import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../Inputs/Input";
 import { toast } from "react-hot-toast";
 import Button from "../Button";
 
- //auth
-import {signIn} from 'next-auth/react'
+//auth
+import { signIn } from "next-auth/react";
 
 export default function RegisterModal() {
   //getting register modal from
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
+
   const [isShowingPass, setIsShowingPass] = useState<boolean>(true);
   const [isLoading, setIsloading] = useState<boolean>(false);
   const {
@@ -46,7 +49,7 @@ export default function RegisterModal() {
       .post("/api/register", data)
       //when Process is finished. close the Modal
       .then(() => {
-        toast.success("Registeration is done")
+        toast.success("Registeration is done");
         registerModal.onClose();
       })
       .catch((error) => {
@@ -58,6 +61,11 @@ export default function RegisterModal() {
         setIsloading(false);
       });
   };
+
+  const toggleModal = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [registerModal, loginModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -101,7 +109,7 @@ export default function RegisterModal() {
       <hr />
       <Button
         outline
-        onClick={() => signIn('google')}
+        onClick={() => signIn("google")}
         label="Continue with Google"
         icon={FcGoogle}
       />
@@ -109,7 +117,7 @@ export default function RegisterModal() {
         outline
         //ISSUE 00
         //github sign in returns the value of the github account but it still does not change login status
-        onClick={() => signIn('github')}
+        onClick={() => signIn("github")}
         label="Continue with GitHub"
         icon={AiFillGithub}
       />
@@ -118,7 +126,7 @@ export default function RegisterModal() {
           <div>Already have an Account?</div>
           <div
             className="text-neutral-800 font-bold cursor-pointer hover:underline"
-            onClick={registerModal.onClose}
+            onClick={toggleModal}
           >
             Login
           </div>

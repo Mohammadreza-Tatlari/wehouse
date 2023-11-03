@@ -1,15 +1,17 @@
 "use client"
+import {useState , useCallback} from "react"
 import { AiOutlineMenu} from 'react-icons/ai'
-import Avatar from '../Avatar'
+import { SafeUserType } from '@/app/types'
+import { signOut } from 'next-auth/react'
 //Components
+import Avatar from '../Avatar'
 import MenuItem from './MenuItem'
 //hooks
-import {useState , useCallback} from "react"
 import useRegisterModal from '@/app/hooks/useRegisterModal'
 import useLoginModal from '@/app/hooks/useLoginModal'
+import useRentModal from '@/app/hooks/useRentModal'
 
-import { signOut } from 'next-auth/react'
-import { SafeUserType } from '@/app/types'
+
 
 interface UserMenuProp{
  currentUser?: SafeUserType | null
@@ -17,9 +19,11 @@ interface UserMenuProp{
 
 export default function UserMenu({currentUser}: UserMenuProp) {
 
-    const [isOpen , setIsOpen] = useState<boolean>(true)
-    const registerModal = useRegisterModal()
-    const loginModal = useLoginModal()
+    const [isOpen , setIsOpen] = useState<boolean>(false)
+
+    const registerModal = useRegisterModal();
+    const loginModal = useLoginModal();
+    const rentModal = useRentModal();
 
     //changes the value of isOpen state
     const toggleOpen = useCallback(() => {
@@ -27,11 +31,20 @@ export default function UserMenu({currentUser}: UserMenuProp) {
         console.log("callback called");       
     },[isOpen])
 
+    const onRent = useCallback(() => {
+        //if user does not logged in
+        if(!currentUser){
+           return loginModal.onOpen()
+        }
+        //if user exists Open Rent modal
+        rentModal.onOpen()
+    },[currentUser, loginModal , rentModal])
+
   return (
     <div  className='relative'>
         <div className='flex flex-row items-center gap-3'>
             <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer" 
-            onClick={() => {}}>
+            onClick={onRent}>
                 Wehouse Your Home
             </div>
             <div
@@ -62,7 +75,7 @@ export default function UserMenu({currentUser}: UserMenuProp) {
                     onClick={() => {}} 
                     label='Properties' />
                     <MenuItem 
-                    onClick={() => {}} 
+                    onClick={rentModal.onOpen} 
                     label='Wehouse My Home' />
                     <hr />
                     <MenuItem 
