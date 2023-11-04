@@ -10,6 +10,7 @@ import { categories } from "../navbar/Categories";
 import CategoryInput from "../Inputs/CategoryInput";
 import CountrySelect from "../Inputs/CountrySelect";
 import Map from "../Map";
+import Counter from "../Inputs/Counter";
 
 //giving steps for filling information for renting a house
 enum STEPS {
@@ -54,7 +55,9 @@ export default function RentModal() {
   // keep the values of each step to be reserved 
   const category = watch('category');
   const location = watch('location');
-
+  const guestCount = watch('guestCount')
+  const roomCount = watch('roomCount')
+  const bathroomCount = watch('bathroomCount')
 
   //for rerendering the page
   const setCustomValue = (id: string, value: any) => {
@@ -121,6 +124,33 @@ export default function RentModal() {
         value={location}
         onChange={(value) => setCustomValue('location', value)}/>
         <Map center={location?.latlng}/>
+      </div>
+    )
+  }
+
+  if(step === STEPS.INFO) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading 
+        title="Share some basics about your place"
+        subtitle="Amenities you offer"/>
+        <Counter 
+        title="Guests"
+        subtitle="How many guests are allowed?"
+        value={guestCount}
+        onChange={(value) => setCustomValue('guestCount', value)}/>
+        <hr />
+        <Counter 
+        title="Rooms"
+        subtitle="Number of Rooms"
+        value={roomCount}
+        onChange={(value) => setCustomValue('roomCount', value)}/>
+        <hr />
+        <Counter 
+        title="Bathrooms"
+        subtitle="Number of bathrooms"
+        value={bathroomCount}
+        onChange={(value) => setCustomValue('bathroomCount', value)}/>
       </div>
     )
   }
