@@ -11,6 +11,8 @@ import CategoryInput from "../Inputs/CategoryInput";
 import CountrySelect from "../Inputs/CountrySelect";
 import Map from "../Map";
 import Counter from "../Inputs/Counter";
+import ImageUpload from "../Inputs/ImageUpload";
+
 
 //giving steps for filling information for renting a house
 enum STEPS {
@@ -58,6 +60,7 @@ export default function RentModal() {
   const guestCount = watch('guestCount')
   const roomCount = watch('roomCount')
   const bathroomCount = watch('bathroomCount')
+  const imageSrc = watch('imageSrc')
 
   //for rerendering the page
   const setCustomValue = (id: string, value: any) => {
@@ -151,6 +154,19 @@ export default function RentModal() {
         subtitle="Number of bathrooms"
         value={bathroomCount}
         onChange={(value) => setCustomValue('bathroomCount', value)}/>
+      </div>
+    )
+  }
+
+  if(step === STEPS.IMAGES) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading 
+        title="Add a photo of your place"
+        subtitle="Show guests what the place looks like!"/>
+         <ImageUpload
+         value={imageSrc}
+         onChange={(value) => setCustomValue('imageSrc' , value)} />
       </div>
     )
   }
