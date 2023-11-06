@@ -1,6 +1,10 @@
 "use client";
 import { useMemo, useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
+import axios from "axios";
+
 
 import useRentModal from "@/app/hooks/useRentModal";
 
@@ -12,6 +16,7 @@ import CountrySelect from "../Inputs/CountrySelect";
 import Map from "../Map";
 import Counter from "../Inputs/Counter";
 import ImageUpload from "../Inputs/ImageUpload";
+import Input from "../Inputs/Input";
 
 
 //giving steps for filling information for renting a house
@@ -25,9 +30,12 @@ enum STEPS {
 }
 
 export default function RentModal() {
+
+  const router = useRouter();
   const rentModal = useRentModal();
   //by default it is set to step 0
   const [step, setStep] = useState(STEPS.CATEGORY);
+  const [isLoading , setIsLoading] = useState(false);
 
   //connect selected option to form
   const {
@@ -77,6 +85,34 @@ export default function RentModal() {
   const onNext = () => {
     setStep((value) => value + 1);
   };
+
+  
+  //submitting all the set data to data base via axios
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    if (step !== STEPS.PRICE){
+      return onNext();
+    }
+
+    setIsLoading(true)
+
+    axios.post('/api/listings', data)
+    .then(() => {
+      toast.success('Listing is Created');
+      router.refresh();
+      //it reset entire form. it comes from useForm 
+      reset();
+      setStep(STEPS.CATEGORY);
+      rentModal.onClose();
+    })
+    .catch((error) => {
+      toast.error("Unsuccessful Action")
+      console.log("RentModal error is: " ,error);
+      
+    }).finally(() => {
+      setIsLoading(false);
+    })
+  }
+
 
   //setting the values of buttons depend on steps
   const actionLabel = useMemo(() => {
@@ -171,12 +207,59 @@ export default function RentModal() {
     )
   }
 
+  if(step === STEPS.DESCRIPTION){
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+        title="How would you describe your place?"
+        subtitle="Short and sweet works best!" />
+        <Input
+        id="title"
+        label="title"
+        disabled={isLoading}
+        //from useform
+        register={register}
+        errors={errors}
+        required/>
+        <hr />
+        <Input
+        id="description"
+        label="Description"
+        disabled={isLoading}
+        //from useform
+        register={register}
+        errors={errors}
+        required/>
+      </div>
+    )
+  }
+
+  if(step === STEPS.PRICE) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading 
+        title="Now, set your price"
+        subtitle="How much do you charge per night?"/>
+        <Input 
+        id="price"
+        label="Price"
+        formatPrice
+        type="number"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+        />
+      </div>
+    )
+  }
+
   return (
     <div>
       <Modal
         isOpen={rentModal.isOpen}
         onClose={rentModal.onClose}
-        onSubmit={onNext}
+        onSubmit={handleSubmit(onSubmit)}
         actionLabel={actionLabel}
         secondaryActionLabel={secondActionLabel}
         secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
