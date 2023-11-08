@@ -42,7 +42,9 @@ export default async function RootLayout({
           <RentModal />
           {/* <Modal actionLabel='Submit' isOpen title='Hardcoded Title for modal demostration' /> */}
         </ClientOnly>
+        <div className="pb-20 pt-28">
         {children}
+        </div>
       </body>
     </html>
   );

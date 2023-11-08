@@ -10,6 +10,8 @@ interface ButtonProps {
   outline?: boolean;
   small?: boolean;
   icon?: IconType;
+  //it checks if the button is used in some specific part then have some specific properties
+  useIn?: string;
 }
 
 export default function Button({
@@ -19,6 +21,7 @@ export default function Button({
   small,
   icon: Icon,
   outline,
+  useIn
 }: ButtonProps) {
   return (
     <>
@@ -26,7 +29,7 @@ export default function Button({
         onClick={onClick}
         disabled={disabled}
         className={` relative disabled:opacity-70 disabled:cursor-not-allowed rounded-md hover:opacity-80 transition
-      ${Icon === FcGoogle || Icon == AiFillGithub ? `w-full` : `w-2/3`}
+      ${Icon === FcGoogle || Icon == AiFillGithub || useIn== "EmptyState" ? `w-full` : `w-2/3`}
       ${outline ? `bg-white` : `bg-slate-600`}
       ${outline ? `border-black` : `border-slate-600`}
       ${outline ? `text-black` : `text-white`}

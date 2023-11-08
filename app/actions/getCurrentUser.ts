@@ -39,6 +39,8 @@ export default async function getCurrentUser() {
             emailVerified: currentUser.emailVerified?.toISOString() || null
         }
     } catch (error: any) {
+        //will not throw any error if no user is found.
+        //in case of using in listing and HomePage
         return null;
     }
 }
