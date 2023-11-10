@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useCallback, useMemo } from "react";
 import { Listing, Reservation } from "@prisma/client";
 import { format } from "date-fns";
-import { SafeUserType } from "../types";
+import { SafeLisitngs, SafeUserType } from "../types";
 
 import useCountries from "../hooks/useCountries";
 import HeartButton from "./HeartButton";
@@ -13,7 +13,7 @@ import Button from "./Button";
 
 //using different kind of data because this component is used in different FCs
 interface ListingCardProps {
-  data: Listing;
+  data: SafeLisitngs;
   reservation?: Reservation;
   onAction?: (id: string) => void;
   disabled?: boolean;
@@ -73,6 +73,7 @@ export default function ListingCard({
     //redirect to the single view of that listing
     <div
       className="col-span-1 cursor-pointer group"
+      //redirecting to clinet routing /listing/[listingId] page 
       onClick={() => router.push(`/listings/${data.id}`)}
     >
       <div className="flex flex-col gap-2 w-full">
