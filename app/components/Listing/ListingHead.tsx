@@ -1,10 +1,10 @@
 'use client'
 
 import Image from "next/image";
-import useCountries from "../hooks/useCountries";
-import { SafeUserType } from "../types";
-import Heading from "./Heading";
-import HeartButton from "./HeartButton";
+import useCountries from "../../hooks/useCountries";
+import { SafeUserType } from "../../types";
+import Heading from "./../Heading";
+import HeartButton from "./../HeartButton";
 
 interface ListingHeadProps{
     title: string;

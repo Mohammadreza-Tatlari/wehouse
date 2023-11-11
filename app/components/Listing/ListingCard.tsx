@@ -5,11 +5,11 @@ import Image from "next/image";
 import { useCallback, useMemo } from "react";
 import { Listing, Reservation } from "@prisma/client";
 import { format } from "date-fns";
-import { SafeLisitngs, SafeUserType } from "../types";
+import { SafeLisitngs, SafeUserType } from "../../types";
 
-import useCountries from "../hooks/useCountries";
-import HeartButton from "./HeartButton";
-import Button from "./Button";
+import useCountries from "../../hooks/useCountries";
+import HeartButton from "./../HeartButton";
+import Button from "./../Button";
 
 //using different kind of data because this component is used in different FCs
 interface ListingCardProps {

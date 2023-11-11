@@ -5,7 +5,7 @@ import getListings from "./actions/getListings";
 import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 import EmpyState from "./components/EmpyState";
-import ListingCard from "./components/ListingCard";
+import ListingCard from "./components/Listing/ListingCard";
 
 //async for listing action
 export default async function Home() {

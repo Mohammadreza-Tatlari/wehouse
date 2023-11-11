@@ -1,13 +1,13 @@
 'use client'
 
 import { IconType } from "react-icons";
-import { SafeUserType } from "../types"
+import { SafeUserType } from "../../types"
 
-import useCountries from "../hooks/useCountries";
+import useCountries from "../../hooks/useCountries";
 
-import Avatar from "./Avatar";
+import Avatar from "../Avatar";
 import ListingCategory from "./ListingCategory";
-import Map from "./Map";
+import Map from "../Map";
 //import dynamic from "next/dynamic";
 
 //incase the Map importing does not work in CSR

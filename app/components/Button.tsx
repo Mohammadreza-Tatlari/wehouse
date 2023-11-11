@@ -29,7 +29,7 @@ export default function Button({
         onClick={onClick}
         disabled={disabled}
         className={` relative disabled:opacity-70 disabled:cursor-not-allowed rounded-md hover:opacity-80 transition
-      ${Icon === FcGoogle || Icon == AiFillGithub || useIn== "EmptyState" ? `w-full` : `w-2/3`}
+      ${Icon === FcGoogle || Icon == AiFillGithub || useIn === "EmptyState" || label === 'Reserve' ? `w-full` : `w-2/3`}
       ${outline ? `bg-white` : `bg-slate-600`}
       ${outline ? `border-black` : `border-slate-600`}
       ${outline ? `text-black` : `text-white`}

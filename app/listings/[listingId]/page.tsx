@@ -6,7 +6,7 @@ import getListingById from "@/app/actions/getListingById";
 
 import ClientOnly from "@/app/components/ClientOnly";
 import EmpyState from "@/app/components/EmpyState";
-import ListingClient from "@/app/components/ListingClient";
+import ListingClient from "@/app/components/Listing/ListingClient";
 
 interface IParams{
     listingId?: string;

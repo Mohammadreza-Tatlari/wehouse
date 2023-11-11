@@ -15,3 +15,12 @@ height: 100%;
 .leaflet-top {
     z-index: 0 !important;
 }
+
+/* styling the calendar */
+.rdrMonth {
+    width: 100% !important;
+}
+.rdrCalendarWrapper {
+    width: 100% !important;
+    font-size: 16px !important;
+}
