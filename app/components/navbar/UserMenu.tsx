@@ -1,5 +1,6 @@
 "use client"
 import {useState , useCallback} from "react"
+import { useRouter } from "next/navigation"
 import { AiOutlineMenu} from 'react-icons/ai'
 import { SafeUserType } from '@/app/types'
 import { signOut } from 'next-auth/react'
@@ -19,6 +20,7 @@ interface UserMenuProp{
 
 export default function UserMenu({currentUser}: UserMenuProp) {
 
+    const router = useRouter()
     const [isOpen , setIsOpen] = useState<boolean>(false)
 
     const registerModal = useRegisterModal();
@@ -63,7 +65,7 @@ export default function UserMenu({currentUser}: UserMenuProp) {
                    (
                     <>
                     <MenuItem 
-                    onClick={() => {}} 
+                    onClick={() => {router.push('/trips')}} 
                     label='Trips' />
                     <MenuItem 
                     onClick={() => {}} 

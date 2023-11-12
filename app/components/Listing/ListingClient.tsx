@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { Range } from "react-date-range";
 
-import { SafeLisitng, SafeReservation, SafeUserType } from "../../types";
+import { SafeLisitng , SafeReservation, SafeUserType } from "../../types";
 
 import useLoginModal from "../../hooks/useLoginModal";
 
@@ -76,7 +76,7 @@ export default function ListingClient({
         setDateRange(initialDateRange);
         //Redirection to /trip
         //
-        router.refresh();
+        router.push('/trips');
       })
       .catch(() => {
         toast.error("reservation is failed");
