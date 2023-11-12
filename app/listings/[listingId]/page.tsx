@@ -11,31 +11,30 @@ import ClientOnly from "@/app/components/ClientOnly";
 import EmpyState from "@/app/components/EmpyState";
 import ListingClient from "@/app/components/Listing/ListingClient";
 
-interface IParams{
-    listingId?: string;
+interface IParams {
+  listingId?: string;
 }
 
-export default async function page({ params}: {params: IParams}) {
-    const listing = await getListingById(params);
-    const reservations = await getReservation(params);
-    const currentUser = await getCurrentUser();
+export default async function page({ params }: { params: IParams }) {
+  const listing = await getListingById(params);
+  const reservations = await getReservation(params);
+  const currentUser = await getCurrentUser();
 
-    
-
-    if(!listing){
-        return (
-        <ClientOnly>
-            <EmpyState />
-        </ClientOnly>
-        )
-    }
+  if (!listing) {
+    return (
+      <ClientOnly>
+        <EmpyState />
+      </ClientOnly>
+    );
+  }
   return (
     <div>
-        <ListingClient 
+      <ListingClient
         //will be checked ISSUE02
         listing={listing}
         reservations={reservations}
-        currentUser={currentUser}/>
+        currentUser={currentUser}
+      />
     </div>
-  )
+  );
 }

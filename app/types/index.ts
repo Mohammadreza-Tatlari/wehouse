@@ -9,6 +9,7 @@ User,
     updateAt: string,
     emailVerified: string | null;
 };
+
  //sanitization
 export type SafeLisitng = Omit<
 Listing,
