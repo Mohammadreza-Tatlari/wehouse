@@ -29,12 +29,12 @@ export default async function getListingById(
         }
         return {
             ...listing,
-            createdAt: listing.createdAt.toISOString(),
+            createdAt: listing.createdAt.toString(),
             user: {
                 ...listing.user,
-                createAt: listing.user.createdAt.toISOString(),
-                updatedAt: listing.user.updateAt.toISOString(),
-                emailVerified: listing.user.emailVerified?.toISOString() || null
+                createAt: listing.user.createdAt.toString(),
+                updatedAt: listing.user.updateAt.toString(),
+                emailVerified: listing.user.emailVerified?.toString() || null
             }
         }
     } catch (error: any) {
