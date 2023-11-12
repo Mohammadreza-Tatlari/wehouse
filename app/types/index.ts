@@ -1,4 +1,4 @@
-import { Listing, User } from "@prisma/client";
+import { Listing, Reservation, User } from "@prisma/client";
 
 //type safety for currentUser in navbar
 export type SafeUserType = Omit<
@@ -7,12 +7,21 @@ User,
 > & {
     createdAt: string,
     updateAt: string,
-    emailVerified: string | null
-}
+    emailVerified: string | null;
+};
  //sanitization
-export type SafeLisitngs = Omit<
+export type SafeLisitng = Omit<
 Listing,
 'createdAt'
 > & {
     createdAt: string;
+};
+
+export type SafeReservation = Omit<
+Reservation,
+'createdAt' | 'startDate' | 'endDate' | 'listing'> & {
+    createdAt: string;
+    startDate: string;
+    endDate: string;
+    listing: SafeLisitng;
 }
