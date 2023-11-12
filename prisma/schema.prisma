@@ -24,6 +24,7 @@ model User {
   //optional because of social Login if google or github is selected
   hashedPassword String?
   createdAt      DateTime  @default(now())
+  //be aware of this data type
   updateAt       DateTime  @updatedAt
   //for pushing ids of favorite listing in here.
   favoriteIds    String[]  @db.ObjectId

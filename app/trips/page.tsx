@@ -30,7 +30,8 @@ const TripsPage = async () => {
             <ClientOnly>
                 <EmpyState 
                 title="No trip is found"
-                subtitle="you haven't reserve any trip yet? "/>
+                subtitle="you haven't reserve any trip yet? "
+                tripPage="If you are redirected, consider a Refresh."/>
             </ClientOnly>
         )
     }

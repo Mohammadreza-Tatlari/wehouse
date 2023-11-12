@@ -75,7 +75,6 @@ export default function ListingClient({
         toast.success("listing Reserved");
         setDateRange(initialDateRange);
         //Redirection to /trip
-        //
         router.push('/trips');
       })
       .catch(() => {

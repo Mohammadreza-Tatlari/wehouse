@@ -64,14 +64,15 @@ export default function UserMenu({currentUser}: UserMenuProp) {
                    {currentUser ? 
                    (
                     <>
-                    <MenuItem 
+                    <MenuItem
+                    //it uses the trips folder and page.tsx inside of it 
                     onClick={() => {router.push('/trips')}} 
                     label='Trips' />
                     <MenuItem 
                     onClick={() => {}} 
                     label='favorites' />
                     <MenuItem 
-                    onClick={() => {}} 
+                    onClick={() => {router.push('/reservations')}} 
                     label='reservations' />
                     <MenuItem 
                     onClick={() => {}} 

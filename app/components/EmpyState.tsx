@@ -7,12 +7,14 @@ import Button from './Button';
 interface EmptyStateProps{
  title?: string;
  subtitle?: string;
+ tripPage?:string;
  showReset?: boolean
 }
 
 export default function EmpyState({
     title="No exact Matches has been found",
     subtitle="Try Changing or Removing filter Options",
+    tripPage,
     showReset
 }:EmptyStateProps) {
 
@@ -24,6 +26,7 @@ export default function EmpyState({
         center
         title={title}
         subtitle={subtitle}/>
+        <div className='font-light text-md'>{tripPage}</div>
         <div className='w-48 mt-4'>
             {showReset && (
                 <Button 
