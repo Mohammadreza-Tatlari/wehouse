@@ -69,11 +69,11 @@ export default function UserMenu({currentUser}: UserMenuProp) {
                     onClick={() => {router.push('/trips')}} 
                     label='Trips' />
                     <MenuItem 
-                    onClick={() => {}} 
-                    label='favorites' />
+                    onClick={() => {router.push('/favorites')}} 
+                    label='Favorites' />
                     <MenuItem 
                     onClick={() => {router.push('/reservations')}} 
-                    label='reservations' />
+                    label='Reservations' />
                     <MenuItem 
                     onClick={() => {}} 
                     label='Properties' />
