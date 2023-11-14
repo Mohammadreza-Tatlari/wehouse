@@ -75,7 +75,7 @@ export default function UserMenu({currentUser}: UserMenuProp) {
                     onClick={() => {router.push('/reservations')}} 
                     label='Reservations' />
                     <MenuItem 
-                    onClick={() => {}} 
+                    onClick={() => {router.push('/properties')}} 
                     label='Properties' />
                     <MenuItem 
                     onClick={rentModal.onOpen} 

@@ -1,18 +1,21 @@
 
 import getCurrentUser from "./actions/getCurrentUser";
-import getListings from "./actions/getListings";
+import getListings, { IListingsProps } from "./actions/getListings";
 
 import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 import EmpyState from "./components/EmpyState";
 import ListingCard from "./components/Listing/ListingCard";
 
+interface HomeProps{
+  searchParams: IListingsProps
+}
 //async for listing action
-export default async function Home() {
+export default async function Home({searchParams}:HomeProps) {
 
   //working with currentUser so no API call to database is needed
   //because it is serverside rendering and using database directly
-  const listings = await getListings()
+  const listings = await getListings(searchParams) //searchParams is an Object
   const currentUser = await getCurrentUser();
   //if content is not selected
   //using ClientOnly for hydration
