@@ -8,7 +8,7 @@ export interface IListingsProps {
     startDate?: string;
     endDate?: string;
     locationValue?: string;
-    categroy?: string;
+    category?: string;
 
 }
 
@@ -23,7 +23,7 @@ export default async function getListings(params: IListingsProps) {
             locationValue,
             startDate,
             endDate,
-            categroy
+            category
         } = params
 
         let query: any = {};
@@ -32,8 +32,8 @@ export default async function getListings(params: IListingsProps) {
             query.userId = userId
         }
 
-        if (categroy) {
-            query.categroy = categroy
+        if (category) {
+            query.category = category
         }
 
         if (roomCount) {
