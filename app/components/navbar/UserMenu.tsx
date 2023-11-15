@@ -29,8 +29,7 @@ export default function UserMenu({currentUser}: UserMenuProp) {
 
     //changes the value of isOpen state
     const toggleOpen = useCallback(() => {
-        setIsOpen(!isOpen);
-        console.log("callback called");       
+        setIsOpen(!isOpen);     
     },[isOpen])
 
     const onRent = useCallback(() => {
