@@ -99,12 +99,6 @@ export default function Modal({
                 <div className="flex flex-col gap-2 p-6">
                   <div className="flex flex-row items-center gap-4 w-full justify-center">
                     {/* Primary Buttons of Modal */}
-                    {/* Primary */}
-                    <Button
-                      disabled={disabled}
-                      label={actionLabel}
-                      onClick={handleSubmit}
-                    />
                     {/* secondaryAction */}
                     {secondaryAction && secondaryActionLabel && (
                       <Button
@@ -114,6 +108,12 @@ export default function Modal({
                         onClick={handleSecondaryAction}
                       />
                     )}
+                    {/* Primary */}
+                    <Button
+                      disabled={disabled}
+                      label={actionLabel}
+                      onClick={handleSubmit}
+                    />
                   </div>
                   {/* footer */}
                   {footer}
